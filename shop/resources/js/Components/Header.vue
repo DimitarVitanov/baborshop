@@ -1,3 +1,9 @@
+<script setup>
+const menu_items = [
+    {title:'Macedonian'},
+    {title:'English'},
+]
+</script>
 <template>
     <header>
         <v-container>
@@ -13,12 +19,7 @@
         <v-container fluid="true">
             <v-row align="center">
                 <v-col cols="12" sm="12" lg="4" align="start">
-                    <v-text-field
-                        width="50%"
-                        label="Shop Search"
-                        placeholder="Search"
-                        type="text"
-                    ></v-text-field>
+                    <v-text-field width="50%" label="Shop Search" placeholder="Search" type="text"></v-text-field>
                 </v-col>
 
                 <v-col cols="4" align="center">
@@ -27,11 +28,35 @@
                     </div>
                 </v-col>
 
-                <v-col cols="4" class="d-none d-md-block" align="center">
-                    <div class="header_section--logo">
-                        <img src="images/skin_boutique.png" />
+                <v-col cols="4" align="center">
+                    <div class="d-flex align-center ml-2 ml-md-8">
+                        <v-menu transition="slide-x-transition">
+                            <template v-slot:activator="{ props }">
+                                    <v-icon size="30" color="#e4c1b1" v-bind="props" icon="mdi mdi-earth-arrow-down" class="my-0 py-0" />
+                            </template>
+
+                            <v-list>
+                                <v-list-item v-for="(item, i) in menu_items" :key="i">
+                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                        <div class="header_section--account d-flex align-center justify-center ml-2 ml-md-8">
+                            <v-icon size="30" icon="mdi mdi-account-circle" class="my-0 py-0" />
+                            <small class="text-uppercase ml-2">Your account</small>
+                        </div>
+                        <div class="d-flex ml-2 ml-md-8 ">
+                            <v-icon size="30" icon="mdi mdi-cart-outline" class="my-0 py-0" />
+                        <div class="header_section--card d-flex flex-column ml-1">
+                            <small>Кошничка</small>
+                            <small>0.00 ден.</small>
+                        </div>
+                        </div>
+                     
                     </div>
+
                 </v-col>
+
             </v-row>
         </v-container>
         <!-- Responsive Navbar -->
@@ -67,9 +92,7 @@
                                     <v-list-item-title>About</v-list-item-title>
                                 </v-list-item>
                                 <v-list-item link href="#contact">
-                                    <v-list-item-title
-                                        >Contact</v-list-item-title
-                                    >
+                                    <v-list-item-title>Contact</v-list-item-title>
                                 </v-list-item>
                             </v-list>
                         </v-menu>
@@ -90,21 +113,47 @@ header {
     font-weight: 300;
     font-style: normal;
 }
+
 .header_section {
     width: 100%;
 }
+
 .header_section img {
     width: 200px;
     height: 130px;
 }
+
 .v-field__field {
     border: none !important;
     background: white !important;
     border-bottom: 2px solid #e4c1b1;
 }
-.navbar a{
+
+.navbar a {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
 }
+
+.header_section--card small {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+}
+.header_section--card small:last-child 
+{
+    font-weight: 800;
+}
+.header_section--account{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+}
+.header_section--account small{
+    font-size: 10px;
+}
+
 </style>
