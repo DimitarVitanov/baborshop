@@ -1,7 +1,15 @@
 <script setup>
+import { ref } from "vue";
+import LoginForm from "@/Components/LoginForm.vue"
+const show_form_modal = ref(false)
+
+const openFormModal = () => {
+    show_form_modal.value = true;
+}
+
 const menu_items = [
-    {title:'Macedonian'},
-    {title:'English'},
+    { title: 'Macedonian' },
+    { title: 'English' },
 ]
 </script>
 <template>
@@ -18,41 +26,46 @@ const menu_items = [
 
         <v-container fluid="true">
             <v-row align="center">
-                <v-col cols="12" sm="12" lg="4" align="start">
+                <v-col cols="12" sm="12" lg="4" class="d-none d-md-block" align="start">
                     <v-text-field width="50%" label="Shop Search" placeholder="Search" type="text"></v-text-field>
                 </v-col>
 
-                <v-col cols="4" align="center">
+                <v-col cols="12" sm="12" lg="4" align="center">
                     <div class="header_section--logo">
                         <img src="images/skin_boutique.png" />
                     </div>
                 </v-col>
 
-                <v-col cols="4" align="center">
-                    <div class="d-flex align-center ml-2 ml-md-8">
-                        <v-menu transition="slide-x-transition">
-                            <template v-slot:activator="{ props }">
-                                    <v-icon size="30" color="#e4c1b1" v-bind="props" icon="mdi mdi-earth-arrow-down" class="my-0 py-0" />
-                            </template>
+                <v-col cols="12" sm="12" lg="4" align="center">
+                    <div class="d-flex align-center justify-center">
 
-                            <v-list>
-                                <v-list-item v-for="(item, i) in menu_items" :key="i">
-                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                                </v-list-item>
-                            </v-list>
-                        </v-menu>
-                        <div class="header_section--account d-flex align-center justify-center ml-2 ml-md-8">
+                        <div @click="openFormModal()"
+                            class="header_section--account d-flex align-center justify-center ml-8 cursor-pointer">
                             <v-icon size="30" icon="mdi mdi-account-circle" class="my-0 py-0" />
                             <small class="text-uppercase ml-2">Your account</small>
                         </div>
-                        <div class="d-flex ml-2 ml-md-8 ">
+                        <div class="d-flex  ml-8 ">
                             <v-icon size="30" icon="mdi mdi-cart-outline" class="my-0 py-0" />
-                        <div class="header_section--card d-flex flex-column ml-1">
-                            <small>Кошничка</small>
-                            <small>0.00 ден.</small>
+                            <div class="header_section--card d-flex flex-column ml-1">
+                                <small>Кошничка</small>
+                                <small>0.00 ден.</small>
+                            </div>
+
+                            <div class="ml-8">
+                                <v-menu transition="slide-x-transition">
+                                    <template v-slot:activator="{ props }">
+                                        <v-icon size="30" color="#e4c1b1" v-bind="props" icon="mdi mdi-earth-arrow-down"
+                                            class="my-0 py-0" />
+                                    </template>
+
+                                    <v-list>
+                                        <v-list-item v-for="(item, i) in menu_items" :key="i">
+                                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </div>
                         </div>
-                        </div>
-                     
                     </div>
 
                 </v-col>
@@ -101,6 +114,14 @@ const menu_items = [
             </v-row>
         </v-container>
     </div>
+    <!--start:: Login Form Modal -->
+    <div class="pa-4 text-center">
+        <v-dialog max-width="800" v-model="show_form_modal">
+            <LoginForm />
+        </v-dialog>
+    </div>
+    <!--end:: Login Form Modal-->
+
 </template>
 
 <style>
@@ -143,17 +164,18 @@ header {
     font-optical-sizing: auto;
     font-weight: 600;
 }
-.header_section--card small:last-child 
-{
+
+.header_section--card small:last-child {
     font-weight: 800;
 }
-.header_section--account{
+
+.header_section--account {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 800;
 }
-.header_section--account small{
+
+.header_section--account small {
     font-size: 10px;
 }
-
 </style>
