@@ -13,6 +13,7 @@ const menu_items = [
 ]
 </script>
 <template>
+ <Head title="Header" />
     <header>
         <v-container>
             <v-row>
