@@ -1,8 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import {Head, } from "@inertiajs/inertia-vue3"
 import LoginForm from "@/Components/LoginForm.vue"
-const show_form_modal = ref(false)
+import LoginSignupOption from "@/Components/Modals/LoginSignupOption.vue"
 
+const show_form_modal = ref(false)
+const selected_user = ref(null)
+
+onMounted(()=>{
+    selected_user.value = document.querySelector('meta[name="user"]') ? JSON.parse(document.querySelector('meta[name="user"]').getAttribute('content')) : null
+})
+
+const openOptionModal = () =>{
+    show_option_modal.value = true
+}
 const openFormModal = () => {
     show_form_modal.value = true;
 }
@@ -39,11 +50,11 @@ const menu_items = [
 
                 <v-col cols="12" sm="12" lg="4" align="center">
                     <div class="d-flex align-center justify-center">
-
-                        <div @click="openFormModal()"
+                        <div @click="!selected_user ? openFormModal() : $inertia.visit(route('dashboard'))"
                             class="header_section--account d-flex align-center justify-center ml-8 cursor-pointer">
                             <v-icon size="30" icon="mdi mdi-account-circle" class="my-0 py-0" />
-                            <small class="text-uppercase ml-2">Your account</small>
+                            <small v-if="!selected_user" class="text-uppercase ml-2">Your account</small>
+                            <small v-else class="text-uppercase ml-2"> {{ selected_user.name }}</small>
                         </div>
                         <div class="d-flex  ml-8 ">
                             <v-icon size="30" icon="mdi mdi-cart-outline" class="my-0 py-0" />
@@ -115,6 +126,16 @@ const menu_items = [
             </v-row>
         </v-container>
     </div>
+
+
+    <!--start: Option Login/Signup Modal-->
+    <div class="pa-4 text-center">
+        <v-dialog max-width="400" location="bottom" v-model="show_option_modal">
+            <LoginSignupOption/>
+        </v-dialog>
+    </div>
+    <!--end:: Option Login/Signup Modal-->
+
     <!--start:: Login Form Modal -->
     <div class="pa-4 text-center">
         <v-dialog max-width="800" v-model="show_form_modal">
@@ -122,7 +143,6 @@ const menu_items = [
         </v-dialog>
     </div>
     <!--end:: Login Form Modal-->
-
 </template>
 
 <style>
