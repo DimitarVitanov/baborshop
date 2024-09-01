@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import {Head} from '@inertiajs/inertia-vue3'
+import {Head} from '@inertiajs/vue3'
 const currentStep = ref(0); // Manually track the current step
 const show_registration_form = ref(false)
 const show_login_form = ref(false)
@@ -101,14 +101,14 @@ const saveCredentials = async() => {
     formData.append('password', user.value.password)
     formData.append('password_confirmation', user.value.password_confirmation)
 
-    
+
     const response = await fetch(route('register'),{
         method:'POST',
         body:formData,
     })
     if (response.ok) {
     fireMessage('Успешна регистрација!', true, false, 'dashboard');
-    } else {    
+    } else {
     fireMessage('Регистрацијата не успеа. Ве молиме, обидете се повторно.');
     }
     clearValues()
@@ -164,9 +164,8 @@ const checkCredentials = async ()=>{
         <v-stepper-window direction="vertical">
             <v-stepper-window-item value="10" v-if="!show_registration_form && !show_login_form">
                 <v-card title="Ве молиме изберете" flat>
-                    ;
-                        <v-btn @click="handleLoginStep()" color="primary"> Логирај се</v-btn>
-                        <v-btn @click="handleRegistrationStep()" color="red" class="ml-2"> Регистрирај се</v-btn>
+                        <v-btn @click="handleLoginStep()" color="primary" class="ml-2 mt-2"> Логирај се</v-btn>
+                        <v-btn @click="handleRegistrationStep()" color="red" class="ml-2 mt-2 "> Регистрирај се</v-btn>
                 </v-card>
             </v-stepper-window-item>
             <v-stepper-window-item value="11" v-if="show_login_form">
@@ -182,20 +181,20 @@ const checkCredentials = async ()=>{
                     <v-text-field
                         v-model="user.email"
                         label="Корисничко име или емаил"
-                        placeholder="Корисничко име" 
+                        placeholder="Корисничко име"
                         outlined
                         type="email"
                     ></v-text-field>
                     <v-text-field
                         v-model="user.password"
                         label="Лозинка"
-                        placeholder="Вашата лозинка" 
+                        placeholder="Вашата лозинка"
                         outlined
                         type="password"
                     ></v-text-field>
                     <v-btn color="success" @click="checkCredentials()" class="mx-auto d-block mb-2">Логирај се</v-btn>
 
-                  
+
                 </v-card>
             </v-stepper-window-item>
 
@@ -204,7 +203,7 @@ const checkCredentials = async ()=>{
                     <v-text-field
                         v-model="user.name"
                         label="Име"
-                        placeholder="Вашето име" 
+                        placeholder="Вашето име"
                         outlined
                     ></v-text-field>
                 </v-card>

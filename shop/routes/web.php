@@ -16,7 +16,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
     */
-});
+})->name('home');
 Route::get('/login',[AuthenticatedSessionController::class])->name('login');
 
 Route::get('/dashboard', function () {

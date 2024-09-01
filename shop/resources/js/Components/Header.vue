@@ -2,8 +2,7 @@
 import { ref, onMounted } from "vue";
 import {Head, } from "@inertiajs/inertia-vue3"
 import LoginForm from "@/Components/LoginForm.vue"
-import LoginSignupOption from "@/Components/Modals/LoginSignupOption.vue"
-
+import DesktopNav from "@/Components/Menu/DesktopNav.vue"
 const show_form_modal = ref(false)
 const selected_user = ref(null)
 
@@ -35,7 +34,6 @@ const menu_items = [
         </v-container>
     </header>
     <div class="header_section">
-
         <v-container fluid="true">
             <v-row align="center">
                 <v-col cols="12" sm="12" lg="4" class="d-none d-md-block" align="start">
@@ -85,63 +83,14 @@ const menu_items = [
             </v-row>
         </v-container>
         <!-- Responsive Navbar -->
-        <v-container fluid="true" class="navbar">
-            <v-row align="center">
-                <v-col cols="12">
-                    <!-- Desktop Links -->
-                    <v-row class="d-none d-md-flex" justify="center">
-                        <v-btn text href="#home">Сите Категории</v-btn>
-                        <v-btn class="ml-lg-5" text href="#shop">За Лице</v-btn>
-                        <v-btn class="ml-lg-5" href="#about">За Тело</v-btn>
-                        <v-btn class="ml-lg-5" href="#contact">Шминки</v-btn>
-                        <v-btn class="ml-lg-5" text href="#contact">Колекции</v-btn>
-                    </v-row>
-
-                    <!-- Hamburger Menu -->
-                    <v-row class="d-flex d-md-none" justify="end">
-                        <v-menu offset-y bottom left>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn icon v-bind="attrs" v-on="on">
-                                    <v-icon>mdi-menu</v-icon>
-                                </v-btn>
-                            </template>
-
-                            <v-list>
-                                <v-list-item link href="#home">
-                                    <v-list-item-title>Home</v-list-item-title>
-                                </v-list-item>
-                                <v-list-item link href="#shop">
-                                    <v-list-item-title>Shop</v-list-item-title>
-                                </v-list-item>
-                                <v-list-item link href="#about">
-                                    <v-list-item-title>About</v-list-item-title>
-                                </v-list-item>
-                                <v-list-item link href="#contact">
-                                    <v-list-item-title>Contact</v-list-item-title>
-                                </v-list-item>
-                            </v-list>
-                        </v-menu>
-                    </v-row>
-                </v-col>
-            </v-row>
-        </v-container>
+        <DesktopNav/>
     </div>
 
-
-    <!--start: Option Login/Signup Modal-->
-    <div class="pa-4 text-center">
-        <v-dialog max-width="400" location="bottom" v-model="show_option_modal">
-            <LoginSignupOption/>
-        </v-dialog>
-    </div>
-    <!--end:: Option Login/Signup Modal-->
 
     <!--start:: Login Form Modal -->
-    <div class="pa-4 text-center">
         <v-dialog max-width="800" v-model="show_form_modal">
             <LoginForm />
         </v-dialog>
-    </div>
     <!--end:: Login Form Modal-->
 </template>
 
@@ -167,7 +116,7 @@ header {
 
 .v-field__field {
     border: none !important;
-    background: white !important;
+    background: #ffffff !important;
     border-bottom: 2px solid #e4c1b1;
 }
 
