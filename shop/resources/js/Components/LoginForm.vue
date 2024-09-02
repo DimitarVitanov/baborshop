@@ -35,6 +35,11 @@ const handleRegistrationStep = () => {
 const handleLoginStep = () =>{
     show_login_form.value = true
 }
+const goBackToOption = () =>{
+    show_login_form.value= false
+    show_registration_form.value = false
+    currentStep.value = 0
+}
 const clearValues = ()=>{
     show_registration_form = false
     show_login_form = false
@@ -149,7 +154,6 @@ const checkCredentials = async ()=>{
             <Head title="Register Form" />
     <v-stepper  hide-actions v-model="currentStep" alt-labels non-linear>
         <v-stepper-header class="d-none d-md-flex" >
-
         <!-- Adjust visibility based on show_registration_form -->
         <v-stepper-item :complete="currentStep > 10" v-if="!show_registration_form && !show_login_form" icon="mdi mdi-account" class="mx-auto" title="Избор" value="10"></v-stepper-item>
         <v-stepper-item :complete="currentStep > 11" v-if="show_login_form" icon="mdi mdi-account" title="Влез" value="11" class="mx-auto"></v-stepper-item>
@@ -192,8 +196,11 @@ const checkCredentials = async ()=>{
                         outlined
                         type="password"
                     ></v-text-field>
-                    <v-btn color="success" @click="checkCredentials()" class="mx-auto d-block mb-2">Логирај се</v-btn>
-
+                    <div class="d-flex justify-between">
+                        <v-btn @click="goBackToOption()"color="gray">Назад</v-btn>
+                        <v-btn color="success" @click="checkCredentials()" class="mb-2">Логирај се</v-btn>
+                    </div>
+                    
 
                 </v-card>
             </v-stepper-window-item>
@@ -260,7 +267,8 @@ const checkCredentials = async ()=>{
                 <v-btn @click="next()">Напред</v-btn>
             </template>
             <template #prev="{ props }">
-                <v-btn @click="prev()">Назад</v-btn>
+                <v-btn v-if="currentStep > 0" @click="prev()">Назад</v-btn>
+                <v-btn v-else :disabled="false" color="gray" @click="goBackToOption">Назад</v-btn>
             </template>
         </v-stepper-actions>
     </v-stepper>
@@ -271,5 +279,12 @@ const checkCredentials = async ()=>{
 .swal2-container{
     z-index: 9999;
 }
-/* You can add custom styles here */
+.v-text-field input[type='text']:focus,
+.v-text-field input[type='password']:focus,
+.v-text-field input[type='email']:focus 
+{
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
 </style>

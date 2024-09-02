@@ -40,7 +40,6 @@ const carouselHeight = computed(()=>{
 <style>
 .home {
     width: 100%;
-    height: 100vh;
 }
 .image-background-color{
     background:#FCF7F4;

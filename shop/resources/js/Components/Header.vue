@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import {Head, } from "@inertiajs/inertia-vue3"
 import LoginForm from "@/Components/LoginForm.vue"
 import DesktopNav from "@/Components/Menu/DesktopNav.vue"
 const show_form_modal = ref(false)
@@ -23,7 +22,6 @@ const menu_items = [
 ]
 </script>
 <template>
- <Head title="Header" />
     <header>
         <v-container>
             <v-row>
